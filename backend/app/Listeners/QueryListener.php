@@ -32,7 +32,7 @@ class QueryListener
                 $sql = preg_replace('/\?/', array_shift($bindings), $sql, 1);
             }
 
-            Log::info($sql);
+            Log::channel('sql')->info($sql);
         }
     }
 }
