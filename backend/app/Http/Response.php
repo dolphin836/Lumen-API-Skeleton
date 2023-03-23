@@ -28,4 +28,15 @@ class Response
 
         return response()->json($content);
     }
+
+    public static function error(int $code = 0, string $message = '', int $stateCode = 200): JsonResponse
+    {
+        $content = [
+               'code' => $code,
+            'message' => $message,
+               'data' => []
+        ];
+
+        return response()->json($content, $stateCode);
+    }
 }

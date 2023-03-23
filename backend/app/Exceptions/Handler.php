@@ -52,11 +52,11 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof NotFoundHttpException) {
-            throw new CommonException('NOT_FOUND');
+            throw new CommonException('NOT_FOUND', [], 404);
         }
 
         if ($exception instanceof MethodNotAllowedHttpException) {
-            throw new CommonException('METHOD_NOT_ALLOWED');
+            throw new CommonException('METHOD_NOT_ALLOWED', [], 405);
         }
 
         return parent::render($request, $exception);

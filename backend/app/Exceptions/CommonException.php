@@ -36,6 +36,11 @@ class CommonException extends Exception
     public string $exceptionMessage;
 
     /**
+     * Http 状态码
+     */
+    public int $stateCode = 200;
+
+    /**
      * 异常定义：异常码 4 位
      *
      * @var array
@@ -57,7 +62,7 @@ class CommonException extends Exception
      * @author Wang HaiBing <wanghaibing836@gmail.com>
      * @date   2020/12/08 11:20
      */
-    public function __construct(string $exceptionCode, array $data = [])
+    public function __construct(string $exceptionCode, array $data = [], int $stateCode = 200)
     {
         if (isset($this->exception[$exceptionCode])) {
             $exceptionContent = $this->exception[$exceptionCode];
@@ -76,6 +81,8 @@ class CommonException extends Exception
             $this->exceptionCode    = $this->moduleCode . self::UNKNOWN_EXCEPTION_CODE;
             $this->exceptionMessage = self::UNKNOWN_EXCEPTION_MESSAGE;
         }
+
+        $this->stateCode = $stateCode;
         // 上报异常
         parent::__construct($this->exceptionMessage, $this->exceptionCode);
     }
@@ -85,6 +92,6 @@ class CommonException extends Exception
      */
     public function render(): JsonResponse
     {
-        return Response::success([], $this->exceptionCode, $this->exceptionMessage);
+        return Response::error($this->exceptionCode, $this->exceptionMessage, $this->stateCode);
     }
 }
