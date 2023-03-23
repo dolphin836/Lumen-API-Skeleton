@@ -1,0 +1,5 @@
+/.idea
+/.vscode
+/mysql/log
+/nginx/log
+.env
