@@ -17,6 +17,7 @@ use Laravel\Lumen\Routing\Router;
 
 $router->group(['prefix' => 'user'], function() use ($router) {
     $router->post('signIn', 'UserController@signIn');
+    $router->post('getList', 'UserController@getList');
 });
 
 

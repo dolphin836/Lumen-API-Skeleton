@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\UserSignInRequest;
 use App\Http\Response;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
@@ -15,20 +16,17 @@ class UserController extends Controller
     {
         $name = $request->get('name');
 
-        
-
         return Response::success();
     }
 
-    /**
-     * 注册
-     */
-    public function signUp(UserLoginRequest $request): JsonResponse
+    public function getList(): JsonResponse
     {
-        $name = $request->get('name');
-    
-        // TODO: Implement login logic
-    
-        return Response::success();
+        $where = [
+            ['id', '<', '50']
+        ];
+
+        $userArr = User::getRows($where);
+
+        return Response::success($userArr);
     }
 }

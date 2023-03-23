@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Events\QueryExecuted;
 use Laravel\Lumen\Providers\EventServiceProvider as ServiceProvider;
+use App\Listeners\QueryListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,9 +14,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        \App\Events\ExampleEvent::class => [
-            \App\Listeners\ExampleListener::class,
-        ],
+        // 注册 SQL 监听服务
+        QueryExecuted::class => [
+            QueryListener::class
+        ]
     ];
 
     /**
