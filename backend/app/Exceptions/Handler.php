@@ -10,6 +10,10 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class Handler extends ExceptionHandler
 {
@@ -30,35 +34,36 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Throwable  $exception
+     * @param  Throwable  $e
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function report(Throwable $exception)
+    public function report(Throwable $e)
     {
-        parent::report($exception);
+        parent::report($e);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @param  Request   $request
+     * @param  Throwable $e
      *
-     * @throws \Throwable
+     * @return Response|JsonResponse
+     *
+     * @throws Throwable
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e): Response|JsonResponse
     {
-        if ($exception instanceof NotFoundHttpException) {
+        if ($e instanceof NotFoundHttpException) {
             throw new CommonException('NOT_FOUND', [], 404);
         }
 
-        if ($exception instanceof MethodNotAllowedHttpException) {
+        if ($e instanceof MethodNotAllowedHttpException) {
             throw new CommonException('METHOD_NOT_ALLOWED', [], 405);
         }
 
-        return parent::render($request, $exception);
+        return parent::render($request, $e);
     }
 }

@@ -7,16 +7,11 @@ use Illuminate\Http\JsonResponse;
 class Response
 {
     /**
-     * 返回
+     * 返回成功
      *
      * @param array  $data    数据
      * @param int    $code    状态码
      * @param string $message 消息
-     *
-     * @return JsonResponse
-     *
-     * @author Wang HaiBing <wanghaibing836@gmail.com>
-     * @date   2023/03/08 11:20
      */
     public static function success(array $data = [], int $code = 0, string $message = ''): JsonResponse
     {
@@ -29,6 +24,13 @@ class Response
         return response()->json($content);
     }
 
+    /**
+     * 返回错误
+     *
+     * @param int    $code      状态码
+     * @param string $message   消息
+     * @param int    $stateCode Http 状态码
+     */
     public static function error(int $code = 0, string $message = '', int $stateCode = 200): JsonResponse
     {
         $content = [

@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('manager_role', function (Blueprint $table) {
             $table->id();
-            $table->string('username', 64)->unique()->comment('用户名');
-            $table->string('name', 64)->default('')->comment('姓名');
-            $table->string('phone', 32)->unique()->comment('手机');
-            $table->string('email', 256)->unique()->comment('邮箱');
-            $table->string('password')->default('')->comment('密码');
+            $table->string('name', 64)->unique()->comment('名称');
+            $table->unsignedTinyInteger('is_default')->default(0)->comment('是否默认');
             $table->unsignedTinyInteger('state')->default(0)->comment('状态');
             $table->timestamp('created_at')->useCurrent()->comment('创建时间');
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->comment('更新时间');
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('manager_role');
     }
 };
