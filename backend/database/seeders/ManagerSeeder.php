@@ -20,7 +20,7 @@ class ManagerSeeder extends Seeder
         $manager->username = 'Super Administrator';
         $manager->name     = env('CREATE_MANAGER_NAME');
         $manager->phone    = env('CREATE_MANAGER_PHONE');
-        $manager->email    = Str::random(10).'@gmail.com';
+        $manager->email    = env('CREATE_MANAGER_EMAIL');
         $manager->password = password_hash(env('CREATE_MANAGER_PASSWORD'), PASSWORD_DEFAULT);
         $manager->state    = 0;
         $manager->save();

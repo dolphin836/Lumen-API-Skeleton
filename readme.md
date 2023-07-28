@@ -6,10 +6,12 @@
 
 ## 服务
 
-- MySQL 版本 8.0.32
-- Redis 版本 7.0.9
-- Nginx 版本 1.23.3
-- php-fpm 版本 8.1.16
+- MySQL Version 8.0.32
+- Redis Version 7.0.9
+- Nginx Version 1.23.3
+- php-fpm Version 8.1.16
+- Supervisor Version 4.2.4
+- RabbitMQ Version 3.11.10
 
 ## 启动
 
@@ -65,3 +67,14 @@ docker compose -f docker-compose.development.yml exec php-fpm composer update --
 git fetch --all
 git reset --hard origin/master
 ```
+
+7. 迁移数据库
+
+```shell
+php artisan migrate:fresh
+php artisan db:seed
+```
+
+## 其他
+
+- Supervisor 的 Web 服务的账号和密码在 supervisor/supervisord.conf 中设置的
