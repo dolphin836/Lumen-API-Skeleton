@@ -78,3 +78,8 @@ php artisan db:seed
 ## 其他
 
 - Supervisor 的 Web 服务的账号和密码在 supervisor/supervisord.conf 中设置的
+- Supervisor 常用命令
+  - supervisorctl status|stop|start|restart server_name # 管理单个进程
+  - supervisorctl update # 只重启配置文件变化了的进程
+  - supervisorctl reload # 重启 supervisord（重新加载所有的配置文件）
+  - supervisorctl shutdown # 停止 supervisord

@@ -22,19 +22,19 @@ return [
     */
     'channels' => [
         'stack' => [
-            'driver' => 'stack',
+              'driver' => 'stack',
             'channels' => ['daily', 'sql']
         ],
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days' => 14
+              'path' => storage_path('logs/laravel.log'),
+             'level' => env('LOG_LEVEL', 'debug'),
+              'days' => 14
         ],
         'sql' => [
             'driver' => 'single',
-            'path' => storage_path('logs/sql.log'),
-            'level' => 'info'
+              'path' => storage_path('logs/sql.log'),
+             'level' => 'info'
         ]
     ]
 ];
