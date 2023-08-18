@@ -1,5 +1,5 @@
 <?php
-
+// 规则参考文档：https://laravel.com/docs/10.x/validation#available-validation-rules
 namespace App\Http\Request;
 
 use App\Exceptions\CommonException;
@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CommonRequest extends Request
 {
-    protected array $rules = [];
-
+    protected array $rules    = [];
     protected array $messages = [];
 
     /**
@@ -17,9 +16,7 @@ class CommonRequest extends Request
      */
     public function validate()
     {
-        /** @var Validator $validator */
-        $validator = app('validator');
-        $validator = $validator->make($this->all(), $this->rules, $this->messages);
+        $validator = Validator::make($this->all(), $this->rules, $this->messages);
 
         if ($validator->fails()) {
             $errors = $validator->errors();

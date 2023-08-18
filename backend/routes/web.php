@@ -14,10 +14,6 @@ use Laravel\Lumen\Routing\Router;
 | and give it the Closure to call when that URI is requested.
 |
 */
-
-$router->group(['prefix' => 'user'], function() use ($router) {
-    $router->post('signIn', 'UserController@signIn');
-    $router->post('getList', 'UserController@getList');
-});
+$router->post('getUserPageList', 'UserController@getUserPageList');
 
 
